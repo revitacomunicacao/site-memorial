@@ -1,5 +1,8 @@
-import { Button } from "@/components/ui/button"
-import useSeo from "@/hooks/useSeo"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import useSeo from "@/hooks/useSeo";
+import { Accordion } from "@radix-ui/react-accordion";
+import { Banner } from "./home/components/banner";
 
 export default function HomePage() {
   useSeo({
@@ -8,13 +11,11 @@ export default function HomePage() {
     image: "https://via.placeholder.com/150",
     //imagem de compartilhamento
     icon: "https://via.placeholder.com/150",
-    //favicon  
-  })
+    //favicon
+  });
   return (
-    <main style={{ padding: 20 }}>
-      <h1 className="text-red-500">Bem‑vindo ao Template React</h1>
-      <p>Use este projeto como base para seus sites institucionais.</p>
-      <Button>TESTE</Button>
+    <main>
+      <Banner />
     </main>
-  )
+  );
 }
