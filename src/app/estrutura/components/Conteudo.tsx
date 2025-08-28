@@ -13,7 +13,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-
 export const Conteudo = () => {
 
   const { data: estrutura, loading, error, refetch } = useContent<IEstrutura>("/estruturas")
