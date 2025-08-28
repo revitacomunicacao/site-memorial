@@ -1,21 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import useSeo from "@/hooks/useSeo";
-import { Accordion } from "@radix-ui/react-accordion";
-import { Banner } from "./home/components/banner";
+import { Banner } from "@/app/home/components/Banner";
+import { BlocoDois } from "./home/components/BlocoDois";
+import BlocoTres from "./home/components/BlocoTres";
 
 export default function HomePage() {
-  useSeo({
-    title: "Home",
-    description: "Home",
-    image: "https://via.placeholder.com/150",
-    //imagem de compartilhamento
-    icon: "https://via.placeholder.com/150",
-    //favicon
-  });
   return (
     <main>
       <Banner />
+      <BlocoDois />
+      <BlocoTres />
     </main>
   );
 }

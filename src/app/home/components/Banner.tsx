@@ -1,7 +1,3 @@
-import banner1 from "@/assets/1.avif";
-import banner2 from "@/assets/2.avif";
-import banner3 from "@/assets/3.avif";
-
 import {
   Carousel,
   CarouselContent,
@@ -9,9 +5,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useContent } from "@/hooks/useContent";
+import { IBanners } from "../types/IBanners";
 
 export const Banner = () => {
-  const banners = [{ link: banner1 }, { link: banner2 }, { link: banner3 }];
+  const { data: banners, error, loading, refetch  } = useContent<IBanners>("/banners")
+
+  if(loading) return (
+    <section className="flex justify-center items-center h-[388px]">
+      <p>Carregando...</p>
+    </section>
+  )
 
   return (
     <section>
@@ -22,9 +26,9 @@ export const Banner = () => {
           className="w-full"
         >
           <CarouselContent>
-            {banners.map((b, index) => (
-              <CarouselItem key={index}>
-                <img className="w-full h-full" src={b.link} alt={`Banner ${index + 1}`} />
+            {banners.map(({ banner, id, title }) => (
+              <CarouselItem key={id}>
+                <img className="w-full h-full" src={banner} alt={title} />
               </CarouselItem>
             ))}
           </CarouselContent>
