@@ -34,29 +34,29 @@ export const BlocoTres = () => {
   ];
 
   return (
-    <section className="w-full bg-[#a9cd48] py-12">
-      <div className="mx-auto max-w-4xl px-6 flex flex-col justify-center items-center">
+    <section className="w-full bg-[#a9cd48] py-8 sm:py-12">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 flex flex-col justify-center items-center">
         {/* Título */}
-        <div className="text-center bg-[#a9cd48] w-fit -mb-[45px] z-20 px-5">
-          <h2 className="text-[36px] font-medium text-[#355b39]">
+        <div className="text-center bg-[#a9cd48] w-fit -mb-8 sm:-mb-[45px] z-20 px-3 sm:px-5">
+          <h2 className="text-xl sm:text-2xl lg:text-[36px] font-medium text-[#355b39] leading-tight">
             Por que investir em
           </h2>
-          <h3 className="text-[36px] font-medium text-[#355b39] -mt-2">
+          <h3 className="text-xl sm:text-2xl lg:text-[36px] font-medium text-[#355b39] -mt-1 sm:-mt-2 leading-tight">
             um jazigo familiar?
           </h3>
         </div>
 
         {/* Caixa com borda */}
-        <div className="relative border-[#355b39] border-2 rounded-md bg-[#a9cd48] p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-20 gap-x-6 pt-20">
+        <div className="relative border-[#355b39] border-2 rounded-md bg-[#a9cd48] p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-y-16 sm:gap-x-6 pt-12 sm:pt-20">
             {items.map((item, i) => (
-              <div key={i} className="flex items-center justify-center gap-4">
+              <div key={i} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <img
                   src={item.icon}
-                  alt="icone"
-                  className="h-30 w-30 object-contain"
+                  alt="ícone"
+                  className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-contain flex-shrink-0"
                 />
-                <p className="text-[18px] text-white leading-relaxed">
+                <p className="text-sm sm:text-base lg:text-[18px] text-white leading-relaxed text-center sm:text-left">
                   {item.text}
                 </p>
               </div>
@@ -64,10 +64,10 @@ export const BlocoTres = () => {
           </div>
 
           {/* Botão Saiba mais */}
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-8 sm:mt-10">
             <button
               type="button"
-              className="rounded-full bg-[#34893d] border-2 border-[#355b39] text-white px-20 py-2 -mb-[47px] text-xl shadow-md hover:opacity-90 transition"
+              className="rounded-full bg-[#34893d] border-2 border-[#355b39] text-white px-8 sm:px-12 lg:px-20 py-2 sm:py-3 -mb-8 sm:-mb-[47px] text-base sm:text-lg lg:text-xl shadow-md hover:opacity-90 transition font-medium"
             >
               Saiba mais
             </button>

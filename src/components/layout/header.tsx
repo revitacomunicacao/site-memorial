@@ -5,10 +5,20 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import Logo from "@/assets/logo.webp"
 import { useContent } from "@/hooks/useContent"
 import { IMenu } from "./types/IMenu"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Menu } from "lucide-react"
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -28,92 +38,163 @@ export default function Header() {
   // pega a rota atual para marcar o ativo
   const pathname = typeof window !== "undefined" ? window.location.pathname : "/"
 
+  // Função para renderizar os links do menu
+  const renderMenuLinks = (isMobile = false) => {
+    if (loading) {
+      return (
+        <>
+          {Array.from({ length: 9 }).map((_, i) => (
+            <div key={i} className={isMobile ? "py-3" : ""}>
+              <Skeleton className="h-4 w-20" />
+            </div>
+          ))}
+        </>
+      )
+    }
+
+    if (error) {
+      return LINKS.map((link, idx) => {
+        const isActive =
+          link.href === "/"
+            ? pathname === "/"
+            : pathname.startsWith(link.href)
+
+        return isMobile ? (
+          <a
+            key={idx}
+            href={link.href}
+            className={cn(
+              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg",
+              "text-[#2f5334]",
+              isActive && "text-[#c6d755] bg-gray-50"
+            )}
+          >
+            {link.label}
+          </a>
+        ) : (
+          <NavigationMenuItem key={idx}>
+            <NavigationMenuLink
+              href={link.href}
+              className={cn(
+                "text-[15px] font-medium leading-none",
+                "text-[#2f5334]",
+                "transition-colors hover:opacity-80",
+                isActive && "text-[#c6d755]"
+              )}
+            >
+              {link.label}
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )
+      })
+    }
+
+    if (menu && menu.length > 0) {
+      return menu.map(({ name, href }, idx) => {
+        const isActive =
+          href === "/"
+            ? pathname === "/"
+            : pathname.startsWith(href)
+
+        return isMobile ? (
+          <a
+            key={idx}
+            href={href}
+            className={cn(
+              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg",
+              "text-[#2f5334]",
+              isActive && "text-[#c6d755] bg-gray-50"
+            )}
+          >
+            {name}
+          </a>
+        ) : (
+          <NavigationMenuItem key={idx}>
+            <NavigationMenuLink
+              href={href}
+              className={cn(
+                "text-[15px] font-medium leading-none",
+                "text-[#2f5334]",
+                "transition-colors hover:opacity-80",
+                isActive && "text-[#c6d755]"
+              )}
+            >
+              {name}
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )
+      })
+    }
+
+    // Fallback final
+    return LINKS.map((link, idx) => (
+      isMobile ? (
+        <a
+          key={idx}
+          href={link.href}
+          className="block py-3 px-4 text-lg font-medium text-[#2f5334] transition-colors hover:bg-gray-50 rounded-lg"
+        >
+          {link.label}
+        </a>
+      ) : (
+        <NavigationMenuItem key={idx}>
+          <NavigationMenuLink
+            href={link.href}
+            className={cn(
+              "text-[15px] font-medium leading-none",
+              "text-[#2f5334]",
+              "transition-colors hover:opacity-80"
+            )}
+          >
+            {link.label}
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      )
+    ))
+  }
+
   return (
-    <header className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-6 flex items-center justify-between py-4">
+    <header className="w-full bg-white shadow-sm">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <img src={Logo} alt="Memorial Parque Uberaba" className="h-20 w-auto" />
+          <img 
+            src={Logo} 
+            alt="Memorial Parque Uberaba" 
+            className="h-16 sm:h-20 w-auto" 
+          />
         </a>
 
-        {/* Navegação */}
-        <NavigationMenu>
+        {/* Menu Desktop */}
+        <NavigationMenu className="hidden lg:block">
           <NavigationMenuList className="flex gap-8">
-            {loading ? (
-              // Loading state para o menu
-              <>
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <NavigationMenuItem key={i}>
-                    <div className="h-4 w-20 bg-gray-200 rounded animate-pulse" />
-                  </NavigationMenuItem>
-                ))}
-              </>
-            ) : error ? (
-              LINKS.map((link, idx) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href)
-
-                return (
-                  <NavigationMenuItem key={idx}>
-                    <NavigationMenuLink
-                      href={link.href}
-                      className={cn(
-                        "text-[15px] font-medium leading-none",
-                        "text-[#2f5334]",
-                        "transition-colors hover:opacity-80",
-                        isActive && "text-[#c6d755]"
-                      )}
-                    >
-                      {link.label}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                )
-              })
-            ) : menu && menu.length > 0 ? (
-              // Menu dinâmico da API
-              menu.map(({ name, href }, idx) => {
-                const isActive =
-                  href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(href)
-
-                return (
-                  <NavigationMenuItem key={idx}>
-                    <NavigationMenuLink
-                      href={href}
-                      className={cn(
-                        "text-[15px] font-medium leading-none",
-                        "text-[#2f5334]",
-                        "transition-colors hover:opacity-80",
-                        isActive && "text-[#c6d755]"
-                      )}
-                    >
-                      {name}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                )
-              })
-            ) : (
-              // Fallback final
-              LINKS.map((link, idx) => (
-                <NavigationMenuItem key={idx}>
-                  <NavigationMenuLink
-                    href={link.href}
-                    className={cn(
-                      "text-[15px] font-medium leading-none",
-                      "text-[#2f5334]",
-                      "transition-colors hover:opacity-80"
-                    )}
-                  >
-                    {link.label}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))
-            )}
+            {renderMenuLinks(false)}
           </NavigationMenuList>
         </NavigationMenu>
+
+        {/* Menu Mobile */}
+        <Sheet>
+          <SheetTrigger asChild className="lg:hidden">
+            <button className="p-2 text-[#2f5334] hover:bg-gray-100 rounded-lg transition-colors">
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Abrir menu</span>
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-80 sm:w-96">
+            <SheetHeader>
+              <SheetTitle className="text-left text-[#2f5334] text-xl font-bold">
+                Menu
+              </SheetTitle>
+            </SheetHeader>
+            <div className="mt-6">
+              <ScrollArea className="h-[calc(100vh-120px)]">
+                <div className="space-y-2 pr-4">
+                  {renderMenuLinks(true)}
+                </div>
+              </ScrollArea>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   )

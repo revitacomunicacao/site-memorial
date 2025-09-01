@@ -26,18 +26,28 @@ export const BlocoDois = () => {
   ]
   
   return (
-    <section className="flex flex-col gap-10 justify-center items-center my-10">
-      <div>
-        <h2 className="text-[#345A38] text-[38px]">Onde existe saudade é porque existe AMOR!</h2>
+    <section className="flex flex-col gap-8 sm:gap-10 justify-center items-center my-8 sm:my-10 px-4 sm:px-6">
+      <div className="text-center">
+        <h2 className="text-[#345A38] text-2xl sm:text-3xl lg:text-[38px] leading-tight">
+          Onde existe saudade é porque existe AMOR!
+        </h2>
       </div>
-      <div className="flex flex-row gap-35 justify-center items-start">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-center items-start w-full max-w-6xl">
         {blocosIcones.map(({ img, name, text }, idx)=> (
           <div key={idx} className="flex flex-col gap-3 justify-center items-center text-center">
-            <img src={img} alt="icone do velorio" className="h-full w-28" />
+            <img 
+              src={img} 
+              alt={`ícone do ${name.toLowerCase()}`} 
+              className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 object-contain" 
+            />
             <div>
-              <h3 className="text-[38px] text-[#a9d043]">{name}</h3>
+              <h3 className="text-lg sm:text-xl lg:text-[38px] text-[#a9d043] font-medium">
+                {name}
+              </h3>
               {text && (
-                <h2 className="text-[26px] text-[#a9d043]">{text}</h2>
+                <h2 className="text-sm sm:text-base lg:text-[26px] text-[#a9d043] font-medium">
+                  {text}
+                </h2>
               )}
             </div>
           </div>

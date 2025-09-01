@@ -7,13 +7,18 @@ import {
 } from "@/components/ui/carousel";
 import { useContent } from "@/hooks/useContent";
 import { IBanners } from "../types/IBanners";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const Banner = () => {
   const { data: banners, error, loading, refetch  } = useContent<IBanners>("/banners")
 
   if(loading) return (
-    <section className="flex justify-center items-center h-[388px]">
-      <p>Carregando...</p>
+    <section className="flex justify-center items-center h-[388px] bg-gray-100">
+      <div className="w-full max-w-6xl mx-auto px-6">
+        <div className="flex justify-center">
+          <Skeleton className="h-80 w-full max-w-4xl rounded-2xl" />
+        </div>
+      </div>
     </section>
   )
 
