@@ -1,7 +1,7 @@
 import velorio from "@/assets/velorio.avif"
 import cerimonial from "@/assets/Cerimonial.avif"
 import sepultamento from "@/assets/Sepultamento.avif"
-import cremacao from "@/assets/Cremação.avif"
+import cremacao from "@/assets/Cremacao.avif"
 
 export const BlocoDois = () => {
 

@@ -62,7 +62,7 @@ export const Conteudo = () => {
             </div>
           </div>
       ))}
-      <a href="/contato">
+      <a href="/desenvolvimento/memorial/contato">
         <img src={fotoComoChegar} alt="foto de como chegar" className="w-full" />
       </a>
     </section>

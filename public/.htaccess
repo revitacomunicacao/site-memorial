@@ -1,0 +1,13 @@
+# Configuração Apache para funcionar em subdiretório
+RewriteEngine On
+
+# Redireciona todas as rotas para index.html para suporte ao React Router
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /desenvolvimento/memorial/index.html [L]
+
+# Configuração de cache para assets estáticos
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+</FilesMatch>

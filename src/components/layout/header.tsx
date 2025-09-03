@@ -1,4 +1,3 @@
-import * as React from "react"
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -14,22 +13,22 @@ import {
 } from "@/components/ui/sheet"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
-import Logo from "@/assets/logo.webp"
+import Logo from "@/assets/logo-memorial-parque.png"
 import { useContent } from "@/hooks/useContent"
 import { IMenu } from "./types/IMenu"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Menu } from "lucide-react"
 
 const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/institucional", label: "Institucional" },
-  { href: "/estrutura", label: "Estrutura" },
-  { href: "/planos", label: "Planos" },
-  { href: "/obituario", label: "Obituário" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/primeiros-passos", label: "Primeiros Passos" },
-  { href: "/como-chegar", label: "Como chegar" },
-  { href: "/contato", label: "Contato" },
+  { href: "/desenvolvimento/memorial/", label: "Home" },
+  { href: "/desenvolvimento/memorial/institucional", label: "Institucional" },
+  { href: "/desenvolvimento/memorial/estrutura", label: "Estrutura" },
+  { href: "/desenvolvimento/memorial/planos", label: "Planos" },
+  { href: "/desenvolvimento/memorial/obituario", label: "Obituário" },
+  { href: "/desenvolvimento/memorial/faq", label: "FAQ" },
+  { href: "/desenvolvimento/memorial/primeiros-passos", label: "Primeiros Passos" },
+  { href: "/desenvolvimento/memorial/como-chegar", label: "Como chegar" },
+  { href: "/desenvolvimento/memorial/contato", label: "Contato" },
 ]
 
 export default function Header() {
@@ -39,7 +38,9 @@ export default function Header() {
   const pathname = typeof window !== "undefined" ? window.location.pathname : "/"
   
   // Verifica se está na home para aplicar header fixo
-  const isHome = pathname === "/"
+  // Remove o basename para verificar se é a home
+  const cleanPathname = pathname.replace('/desenvolvimento/memorial', '') || '/'
+  const isHome = cleanPathname === "/"
 
   // Função para renderizar os links do menu
   const renderMenuLinks = (isMobile = false) => {
@@ -58,8 +59,8 @@ export default function Header() {
     if (error) {
       return LINKS.map((link, idx) => {
         const isActive =
-          link.href === "/"
-            ? pathname === "/"
+          link.href === "/desenvolvimento/memorial/"
+            ? cleanPathname === "/"
             : pathname.startsWith(link.href)
 
         return isMobile ? (
@@ -96,13 +97,15 @@ export default function Header() {
       return menu.map(({ name, href }, idx) => {
         const isActive =
           href === "/"
-            ? pathname === "/"
-            : pathname.startsWith(href)
+            ? cleanPathname === "/"
+            : pathname.startsWith("/desenvolvimento/memorial" + href)
+
+        const fullHref = href === "/" ? "/desenvolvimento/memorial/" : "/desenvolvimento/memorial" + href
 
         return isMobile ? (
           <a
             key={idx}
-            href={href}
+            href={fullHref}
             className={cn(
               "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg ",
               "text-[#2f5334]",
@@ -114,7 +117,7 @@ export default function Header() {
         ) : (
           <NavigationMenuItem key={idx}>
             <NavigationMenuLink
-              href={href}
+              href={fullHref}
               className={cn(
                 "text-[15px] leading-none ",
                 "text-[#2f5334]",
@@ -163,11 +166,11 @@ export default function Header() {
     )}>
       <div className="mx-auto max-w-[1350px] flex items-center justify-between">
         {/* Logo */}
-        <a href="/">
+        <a href="/desenvolvimento/memorial/">
           <img 
             src={Logo} 
-            alt="Memorial Parque Uberaba" 
-            className="h-27 w-auto"
+            alt="Memorial Parque Uberaba"
+            className="py-2"
           />
         </a>
 
