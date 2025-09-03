@@ -24,6 +24,7 @@ interface Pessoa {
   setor: string
   quadra_nome: string
   jazigo: string
+  gaveta: string
   quadra_foto: string
   created_at: string
   quadra_id: number
@@ -32,7 +33,7 @@ interface Pessoa {
 // Configuração para URLs de imagens
 const IMAGE_CONFIG = {
   // Base URL para as imagens das quadras
-  QUADRA_BASE_URL: 'https://companhiadamidia.com.br/desenvolvimento/obtuario/admin/uploads',
+  QUADRA_BASE_URL: 'https://companhiadamidia.com.br/desenvolvimento/obituario/admin/uploads',
   
   // Função para gerar URL completa da imagem
   getQuadraImageUrl: (filename: string): string => {
@@ -117,18 +118,23 @@ export function PessoaDetailsDialog({ pessoa, open, onOpenChange }: PessoaDetail
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Quadra:</span>
+                  <span className="text-gray-900">{pessoa.quadra_nome}</span>
+                </div>
+                
+                <div className="flex justify-between items-center py-2 border-b border-gray-200">
                   <span className="font-semibold text-gray-700">Setor:</span>
                   <span className="text-gray-900">{pessoa.setor}</span>
                 </div>
                 
                 <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-gray-700">Quadra:</span>
-                  <span className="text-gray-900">{pessoa.quadra_nome}</span>
+                  <span className="font-semibold text-gray-700">Jazigo:</span>
+                  <span className="text-gray-900">{pessoa.jazigo}</span>
                 </div>
                 
                 <div className="flex justify-between items-center py-2">
-                  <span className="font-semibold text-gray-700">Jazigo:</span>
-                  <span className="text-gray-900">{pessoa.jazigo}</span>
+                  <span className="font-semibold text-gray-700">Gaveta:</span>
+                  <span className="text-gray-900">{pessoa.gaveta}</span>
                 </div>
               </div>
             </div>
@@ -164,12 +170,6 @@ export function PessoaDetailsDialog({ pessoa, open, onOpenChange }: PessoaDetail
                 </p>
               </div>
             )}
-            
-            <div className="text-center mt-4 bg-white p-3 rounded-lg border border-gray-200">
-              <p className="text-base text-gray-700 font-medium">
-                Quadra {pessoa.quadra_nome} • Setor {pessoa.setor}
-              </p>
-            </div>
           </div>
         </div>
       </DialogContent>

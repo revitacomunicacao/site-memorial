@@ -18,6 +18,8 @@ interface ISepultados {
     created_at: string;
     cpf: string;
     data_sepultamento: string;
+    oculto: number;
+    gaveta: string;
     quadra_nome: string;
     quadra_foto: string;
     cpf_formatado: string;

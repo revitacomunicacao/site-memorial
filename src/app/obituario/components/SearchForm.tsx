@@ -24,6 +24,12 @@ export function SearchForm({
 }: SearchFormProps) {
   const [displayValue, setDisplayValue] = useState("")
 
+  // Limpar campo quando o tipo de busca mudar
+  useEffect(() => {
+    onSearchTermChange("")
+    setDisplayValue("")
+  }, [searchType, onSearchTermChange])
+
   // Aplicar máscara baseada no tipo de busca
   useEffect(() => {
     if (searchType === "cpf" && searchTerm) {
@@ -60,13 +66,26 @@ export function SearchForm({
   const getPlaceholder = () => {
     switch (searchType) {
       case "nome":
-        return "Digite o nome da pessoa..."
+        return "Digite o nome completo"
       case "cpf":
-        return "000.000.000-00"
+        return "Digite o CPF completo (ex: 000.000.000-00)"
       case "data":
-        return "DD/MM/AAAA"
+        return "Digite a data de nascimento (ex: 01/01/2025)"
       default:
         return "Digite o termo de busca..."
+    }
+  }
+
+  const getHelperText = () => {
+    switch (searchType) {
+      case "nome":
+        return "Digite o nome e encontre pessoas que começam com essas letras"
+      case "cpf":
+        return "Digite o CPF completo para encontrar a pessoa exata"
+      case "data":
+        return "Busca apenas por data de nascimento"
+      default:
+        return ""
     }
   }
 
@@ -114,6 +133,11 @@ export function SearchForm({
                 Buscar
               </Button>
             </div>
+            {getHelperText() && (
+              <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1">
+                {getHelperText()}
+              </p>
+            )}
           </div>
         </div>
       </form>

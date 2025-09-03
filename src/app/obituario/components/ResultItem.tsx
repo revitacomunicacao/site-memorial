@@ -19,6 +19,7 @@ interface Pessoa {
   setor: string
   quadra_nome: string
   jazigo: string
+  gaveta: string
   quadra_foto: string
   created_at: string
   quadra_id: number
@@ -46,20 +47,20 @@ export function ResultItem({ pessoa, onViewDetails }: ResultItemProps) {
             <div className="mt-2 space-y-2 sm:space-y-1">
               <div className="flex items-center space-x-2 text-gray-600">
                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
-                <span className="text-xs sm:text-sm break-words">
-                  Quadra {pessoa.quadra_nome} • Sepultura {pessoa.jazigo}
+                <span className="text-sm sm:text-lg break-words">
+                  Quadra {pessoa.quadra_nome} • Setor {pessoa.setor} • Jazigo {pessoa.jazigo} • Gaveta {pessoa.gaveta}
                 </span>
               </div>
               
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-gray-600">
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-red-500 flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">Falecimento: {pessoa.data_falecimento_formatada}</span>
+                  <span className="text-xs sm:text-lg">Falecimento: {pessoa.data_falecimento_formatada}</span>
                 </div>
                 
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500 flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">Sepultamento: {pessoa.data_sepultamento_formatada}</span>
+                  <span className="text-xs sm:text-lg">Sepultamento: {pessoa.data_sepultamento_formatada}</span>
                 </div>
               </div>
             </div>

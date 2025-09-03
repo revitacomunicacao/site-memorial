@@ -17,6 +17,8 @@ interface ISepultados {
     created_at: string;
     cpf: string;
     data_sepultamento: string;
+    oculto: number;
+    gaveta: string;
     quadra_nome: string;
     quadra_foto: string;
     cpf_formatado: string;
@@ -29,7 +31,7 @@ interface ISepultados {
 export async function getSepultados(): Promise<ISepultados> {
   try {
     // Usa a URL base correta para o sistema de obituário
-    const response = await fetch("https://companhiadamidia.com.br/desenvolvimento/obtuario/admin/api_pessoas.php");
+    const response = await fetch("https://companhiadamidia.com.br/desenvolvimento/obituario/admin/api_pessoas.php");
     const data = await response.json();
     return data;
   } catch (error) {
