@@ -57,14 +57,14 @@ export const Conteudo = () => {
           
           {/* Título */}
           <div className="flex justify-center items-center my-6 sm:my-10 px-4 sm:px-6">
-            <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight">
+            <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight font-heebo">
               {title}
             </h1>
           </div>
           
           {/* Descrição */}
           <div className="flex justify-center items-center text-center px-4 sm:px-6">
-            <div className="w-full max-w-4xl lg:max-w-[1200px] text-base sm:text-lg lg:text-[22px] content-html" dangerouslySetInnerHTML={{ __html: description }} />
+            <div className="w-full max-w-4xl lg:max-w-[1200px] text-[20px] content-html font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: description }} />
           </div>
           
           {/* Carrossel */}
@@ -87,7 +87,7 @@ export const Conteudo = () => {
                           className="w-full h-24 sm:h-32 lg:h-40 object-cover rounded-lg mb-3 sm:mb-4"
                         />
                         <div className="flex justify-center w-full text-center">
-                          <p className="text-white text-xs sm:text-sm lg:text-base leading-tight">{titulo}</p>
+                          <p className="text-white text-xs sm:text-[18px] lg:text-base leading-tight font-questrial">{titulo}</p>
                         </div>
                       </div>
                     </CarouselItem>

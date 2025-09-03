@@ -38,23 +38,23 @@ export const BlocoTres = () => {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 flex flex-col justify-center items-center">
         {/* Título */}
         <div className="text-center bg-[#a9cd48] w-fit -mb-8 sm:-mb-[45px] z-20 px-3 sm:px-5">
-          <h2 className="text-xl sm:text-2xl lg:text-[36px] font-medium text-[#355b39] leading-tight">
+          <h2 className="text-xl sm:text-2xl lg:text-[36px] text-[#355b39] leading-tight font-heebo">
             Por que investir em
           </h2>
-          <h3 className="text-xl sm:text-2xl lg:text-[36px] font-medium text-[#355b39] -mt-1 sm:-mt-2 leading-tight">
+          <h3 className="text-xl sm:text-2xl lg:text-[36px] text-[#355b39] -mt-1 sm:-mt-2 leading-tight font-heebo">
             um jazigo familiar?
           </h3>
         </div>
 
         {/* Caixa com borda */}
         <div className="relative border-[#355b39] border-2 rounded-md bg-[#a9cd48] p-4 sm:p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-y-16 sm:gap-x-6 pt-12 sm:pt-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-y-16 sm:gap-x-12 pt-12 sm:pt-20">
             {items.map((item, i) => (
               <div key={i} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <img
                   src={item.icon}
                   alt="ícone"
-                  className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-contain flex-shrink-0"
+                  className="h-16 w-16 sm:h-38 sm:w-38 object-contain flex-shrink-0"
                 />
                 <p className="text-sm sm:text-base lg:text-[18px] text-white leading-relaxed text-center sm:text-left">
                   {item.text}
@@ -69,7 +69,9 @@ export const BlocoTres = () => {
               type="button"
               className="rounded-full bg-[#34893d] border-2 border-[#355b39] text-white px-8 sm:px-12 lg:px-20 py-2 sm:py-3 -mb-8 sm:-mb-[47px] text-base sm:text-lg lg:text-xl shadow-md hover:opacity-90 transition font-medium"
             >
-              Saiba mais
+              <a href="/planos">
+                Saiba mais
+              </a>
             </button>
           </div>
         </div>

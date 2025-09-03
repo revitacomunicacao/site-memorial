@@ -4,7 +4,7 @@ import BlocoTres from "./home/components/BlocoTres";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="pt-20">
       <Banner />
       <BlocoDois />
       <BlocoTres />

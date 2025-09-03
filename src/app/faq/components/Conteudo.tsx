@@ -7,10 +7,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useEffect, useState } from "react"
 
 export const Conteudo = () => {
 
   const { data: faqs, loading, error, refetch } = useContent<IFaq>("/faqs")
+
+  const defaultValue = "0"
 
   if (loading) {
     return (
@@ -52,7 +55,7 @@ export const Conteudo = () => {
           
           {/* Título */}
           <div className="my-6 sm:my-8 lg:my-10 px-4 sm:px-6">
-            <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight">
+            <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight font-heebo">
               {title}
             </h1>
           </div>
@@ -64,17 +67,17 @@ export const Conteudo = () => {
                 type="single"
                 collapsible
                 className="w-full"
-                defaultValue="item-0"
+                defaultValue="0"
               >
                 {faq.map(({ pergunta, resposta }, idx) => (
                   <AccordionItem key={idx} value={String(idx)}>
-                    <AccordionTrigger className="border-b-2 border-b-[#365c3a] rounded-none hover:bg-gray-50 transition-colors">
-                      <p className="text-base sm:text-lg lg:text-xl text-[#365c3a] text-left font-medium">
+                    <AccordionTrigger className="border-b-2 border-b-[#355B39] rounded-none transition-colors accordion-trigger-no-underline">
+                      <p className="text-base sm:text-lg lg:text-xl text-[#355B39] hover:text-[#A9CD48] text-left font-heebo transition-colors font-bold">
                         {pergunta}
                       </p>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p className="py-4 text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
+                      <p className="py-4 text-[15px] text-[#000000] leading-relaxed font-wix-madefor font-normal">
                         {resposta}
                       </p>
                     </AccordionContent>

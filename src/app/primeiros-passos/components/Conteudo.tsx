@@ -40,14 +40,14 @@ export const Conteudo = () => {
             
             {/* Título */}
             <div className="flex justify-center items-center my-6 sm:my-8 lg:my-10 px-4 sm:px-6">
-              <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight">
+              <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight font-heebo">
                 {title}
               </h1>
             </div>
             
             {/* Conteúdo */}
             <div className="flex justify-center px-4 sm:px-6">
-              <div className="w-full max-w-4xl lg:max-w-[1200px] content-html text-base sm:text-lg lg:text-xl" dangerouslySetInnerHTML={{ __html: description }} />
+              <div className="w-full max-w-4xl lg:max-w-[1200px] content-html text-[20px] font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: description }} />
             </div>
           </div>
       ))}

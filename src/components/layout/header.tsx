@@ -37,6 +37,9 @@ export default function Header() {
 
   // pega a rota atual para marcar o ativo
   const pathname = typeof window !== "undefined" ? window.location.pathname : "/"
+  
+  // Verifica se está na home para aplicar header fixo
+  const isHome = pathname === "/"
 
   // Função para renderizar os links do menu
   const renderMenuLinks = (isMobile = false) => {
@@ -64,7 +67,7 @@ export default function Header() {
             key={idx}
             href={link.href}
             className={cn(
-              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg",
+              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg ",
               "text-[#2f5334]",
               isActive && "text-[#c6d755] bg-gray-50"
             )}
@@ -76,7 +79,7 @@ export default function Header() {
             <NavigationMenuLink
               href={link.href}
               className={cn(
-                "text-[15px] font-medium leading-none",
+                "text-[15px] font-medium leading-none ",
                 "text-[#2f5334]",
                 "transition-colors hover:opacity-80",
                 isActive && "text-[#c6d755]"
@@ -101,7 +104,7 @@ export default function Header() {
             key={idx}
             href={href}
             className={cn(
-              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg",
+              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg ",
               "text-[#2f5334]",
               isActive && "text-[#c6d755] bg-gray-50"
             )}
@@ -113,7 +116,7 @@ export default function Header() {
             <NavigationMenuLink
               href={href}
               className={cn(
-                "text-[15px] font-medium leading-none",
+                "text-[15px] leading-none ",
                 "text-[#2f5334]",
                 "transition-colors hover:opacity-80",
                 isActive && "text-[#c6d755]"
@@ -132,7 +135,7 @@ export default function Header() {
         <a
           key={idx}
           href={link.href}
-          className="block py-3 px-4 text-lg font-medium text-[#2f5334] transition-colors hover:bg-gray-50 rounded-lg"
+          className="block py-3 px-4 text-lg font-medium text-[#2f5334] transition-colors hover:bg-gray-50 rounded-lg "
         >
           {link.label}
         </a>
@@ -141,7 +144,7 @@ export default function Header() {
           <NavigationMenuLink
             href={link.href}
             className={cn(
-              "text-[15px] font-medium leading-none",
+              "text-[15px] font-medium leading-none ",
               "text-[#2f5334]",
               "transition-colors hover:opacity-80"
             )}
@@ -154,20 +157,23 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full bg-white shadow-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+    <header className={cn(
+      "w-full bg-[#f7f7f7] shadow-sm",
+      isHome && "fixed top-0 left-0 right-0 z-50"
+    )}>
+      <div className="mx-auto max-w-[1350px] flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center">
+        <a href="/">
           <img 
             src={Logo} 
             alt="Memorial Parque Uberaba" 
-            className="h-16 sm:h-20 w-auto" 
+            className="h-27 w-auto"
           />
         </a>
 
         {/* Menu Desktop */}
         <NavigationMenu className="hidden lg:block">
-          <NavigationMenuList className="flex gap-8">
+          <NavigationMenuList className="flex gap-4">
             {renderMenuLinks(false)}
           </NavigationMenuList>
         </NavigationMenu>

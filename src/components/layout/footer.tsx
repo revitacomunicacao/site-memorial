@@ -34,53 +34,54 @@ const FacebookIcon = ({ className = "" }) => (
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#2f5334] text-white py-10">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 px-6">
-        {/* Logo + Endereços */}
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <img src={Logo} alt="Memorial Parque Uberaba" className="w-[35%] mb-4" />
+    <footer className="flex justify-center bg-[#355b39] text-white py-10">
+      <div className="w-[1350px]">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 px-6">
+          {/* Logo + Endereços */}
+          <div className="flex flex-col gap-4 max-w-3xl text-[22px] font-amargo">
+            <img src={Logo} alt="Memorial Parque Uberaba" className="mb-4 w-[181px] h-[80px]" />
+            <div>
+              <p className="font-extrabold text-[#abcd4a]">Escritório Central:</p>
+              <p className="">
+                R. Major Eustáquio, 76 | Edifício Chapadão Sala 1 | 38010-270 | Uberaba – MG
+              </p>
+            </div>
 
-          <div>
-            <p className="font-semibold text-[#c6d755]">Escritório Central:</p>
-            <p className="text-sm">
-              R. Major Eustáquio, 76 | Edifício Chapadão Sala 1 | 38010-270 | Uberaba – MG
-            </p>
+            <div>
+              <p className="font-bold text-[#abcd4a] mt-2">Cemitério Parque:</p>
+              <p className="">
+                R. João Batista Ribeiro, 2555 | Distrito Industrial II | 38064-790 | Uberaba – MG
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-[#abcd4a] mt-2">Telefone:</p>
+              <p className="">(34) 3338 3900</p>
+            </div>
           </div>
 
-          <div>
-            <p className="font-semibold text-[#c6d755] mt-2">Cemitério Parque:</p>
-            <p className="text-sm">
-              R. João Batista Ribeiro, 2555 | Distrito Industrial II | 38064-790 | Uberaba – MG
-            </p>
+          {/* Redes sociais – iguais ao print (círculo branco + ícone verde) */}
+          <div className="flex items-center gap-6 md:self-start md:mt-2">
+            <a
+              href="https://www.instagram.com/memorialparqueuba/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-grid place-items-center w-10 h-10 rounded-full bg-white"
+              aria-label="Instagram"
+            >
+              <InstagramIcon className="w-5 h-5 text-[#2f5334]" />
+            </a>
+
+            <a
+              href="https://www.facebook.com/MemorialParqueUberaba/?locale=pt_BR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-grid place-items-center w-10 h-10 rounded-full bg-white"
+              aria-label="Facebook"
+            >
+              <FacebookIcon className="w-5 h-5 text-[#2f5334]" />
+            </a>
           </div>
-
-          <div>
-            <p className="font-semibold text-[#c6d755] mt-2">Telefone:</p>
-            <p className="text-sm">(34) 3338 3900</p>
-          </div>
-        </div>
-
-        {/* Redes sociais – iguais ao print (círculo branco + ícone verde) */}
-        <div className="flex items-center gap-6 md:self-start md:mt-2">
-          <a
-            href="https://www.instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-grid place-items-center w-10 h-10 rounded-full bg-white"
-            aria-label="Instagram"
-          >
-            <InstagramIcon className="w-5 h-5 text-[#2f5334]" />
-          </a>
-
-          <a
-            href="https://www.facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-grid place-items-center w-10 h-10 rounded-full bg-white"
-            aria-label="Facebook"
-          >
-            <FacebookIcon className="w-5 h-5 text-[#2f5334]" />
-          </a>
         </div>
       </div>
     </footer>

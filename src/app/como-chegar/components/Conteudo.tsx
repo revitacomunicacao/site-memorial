@@ -1,6 +1,7 @@
 import { useContent } from "@/hooks/useContent"
 import { IComoChegar } from "../types/IComoChegar"
 import { Skeleton } from "@/components/ui/skeleton"
+import fotoComoChegar from "@/assets/foto-como-chegar.jpg"
 
 export const Conteudo = () => {
   const { data: comoChegar, loading, error, refetch } = useContent<IComoChegar>("/como-chegar")
@@ -41,26 +42,29 @@ export const Conteudo = () => {
             
             {/* Título */}
             <div className="flex justify-center items-center my-6 sm:my-8 lg:my-10 px-4 sm:px-6">
-              <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight">
+              <h1 className="text-[#365c3a] text-2xl sm:text-3xl lg:text-[40px] font-bold text-center leading-tight font-heebo">
                 {title}
               </h1>
             </div>
             
             {/* Descrição */}
             <div className="flex justify-center my-6 sm:my-8 lg:my-10 px-4 sm:px-6">
-              <div className="w-full max-w-4xl lg:max-w-[1200px] text-base sm:text-lg lg:text-xl content-html" dangerouslySetInnerHTML={{ __html: description }} />
+              <div className="w-full max-w-4xl lg:max-w-[1200px] text-[20px] content-html font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: description }} />
             </div>
 
             {/* Foto do Conteúdo */}
             <div className="flex justify-center items-center mb-16 sm:mb-20 px-4 sm:px-6">
               <img 
-                className="w-full max-w-4xl lg:max-w-[1200px] h-auto rounded-2xl shadow-lg" 
+                className="rounded-2xl" 
                 src={foto_conteudo} 
                 alt={`foto do conteúdo - ${title}`} 
               />
             </div>
           </div>
       ))}
+      <a href="/contato">
+        <img src={fotoComoChegar} alt="foto de como chegar" className="w-full" />
+      </a>
     </section>
   )
 }

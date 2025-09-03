@@ -28,7 +28,8 @@ export const BlocoDois = () => {
   return (
     <section className="flex flex-col gap-8 sm:gap-10 justify-center items-center my-8 sm:my-10 px-4 sm:px-6">
       <div className="text-center">
-        <h2 className="text-[#345A38] text-2xl sm:text-3xl lg:text-[38px] leading-tight">
+        <h2 className="font-libre-baskerville text-[#345A38] text-2xl sm:text-[35px] leading-tight my-10"
+        >
           Onde existe saudade é porque existe AMOR!
         </h2>
       </div>
@@ -41,7 +42,7 @@ export const BlocoDois = () => {
               className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 object-contain" 
             />
             <div>
-              <h3 className="text-lg sm:text-xl lg:text-[38px] text-[#a9d043] font-medium">
+              <h3 className="text-lg sm:text-[29px] text-[#a9d043] font-heebo">
                 {name}
               </h3>
               {text && (

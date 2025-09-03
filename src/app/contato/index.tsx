@@ -33,7 +33,7 @@ export default function Contato() {
   }
 
   return(
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 contato-page">
       <section>
         {contato.map((
           { 
@@ -53,7 +53,7 @@ export default function Contato() {
                   </div>
 
                   <div className="w-full">
-                    <div className="content-html" dangerouslySetInnerHTML={{ __html:description }} />  
+                    <div className="content-html font-questrial" dangerouslySetInnerHTML={{ __html:description }} />  
                   </div>
                 </div>
                 

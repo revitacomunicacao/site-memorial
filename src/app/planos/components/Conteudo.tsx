@@ -48,20 +48,20 @@ export const Conteudo = () => {
           <div className="flex flex-col gap-6 sm:gap-8 lg:gap-10 justify-center items-center my-8 sm:my-10 px-4 sm:px-6">
             {/* Textos em Colunas */}
             <div className="w-full max-w-4xl lg:max-w-[1200px] flex flex-col lg:flex-row gap-8 lg:gap-20 justify-center items-start">
-              <div className="w-full lg:w-[50%] content-html text-base sm:text-lg lg:text-xl" dangerouslySetInnerHTML={{ __html: texto_1 }} />
-              <div className="w-full lg:w-[50%] content-html text-base sm:text-lg lg:text-xl" dangerouslySetInnerHTML={{ __html: texto_2 }} />
+              <div className="w-full lg:w-[50%] content-html text-[20px] font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: texto_1 }} />
+              <div className="w-full lg:w-[50%] content-html text-[20px] font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: texto_2 }} />
             </div>
             
             {/* Linha Divisória */}
             <div className="w-full max-w-4xl lg:max-w-[1200px] h-[1px] bg-black" />
             
             {/* Observações */}
-            <div className="w-full max-w-4xl lg:max-w-[1200px] content-html text-base sm:text-lg lg:text-xl" dangerouslySetInnerHTML={{ __html: observacoes }} /> 
+            <div className="w-full max-w-4xl lg:max-w-[1200px] content-html text-[20px] font-questrial font-normal text-[#000000]" dangerouslySetInnerHTML={{ __html: observacoes }} /> 
           </div>
           
           {/* Seção da Foto */}
-          <div className="w-full bg-[#d5d5d5] flex justify-center items-center py-8 sm:py-10 px-4 sm:px-6">
-            <img src={foto} alt={`foto ilustrativa de ${title}`} className="w-full max-w-4xl lg:max-w-[1200px] h-auto rounded-lg shadow-lg" />
+          <div className="w-full bg-[#d5d5d5] flex justify-center items-center py-8">
+            <img src={foto} alt={`foto ilustrativa de ${title}`} />
           </div>
         </div>
       ))}
