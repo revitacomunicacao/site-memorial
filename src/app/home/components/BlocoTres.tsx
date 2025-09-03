@@ -67,7 +67,7 @@ export const BlocoTres = () => {
           <div className="flex justify-center mt-8 sm:mt-10">
             <button
               type="button"
-              className="rounded-full bg-[#34893d] border-2 border-[#355b39] text-white px-8 sm:px-12 lg:px-20 py-2 sm:py-3 -mb-8 sm:-mb-[47px] text-base sm:text-lg lg:text-xl shadow-md hover:opacity-90 transition font-medium"
+              className="rounded-full bg-[#34893d] border-2 border-[#355b39] text-white px-8 sm:px-12 lg:px-20 py-2 sm:py-3 -mb-8 sm:-mb-[47px] text-base sm:text-lg lg:text-xl shadow-md transition font-medium hover:bg-[#355b39]"
             >
               <a href="/desenvolvimento/memorial/planos">
                 Saiba mais
