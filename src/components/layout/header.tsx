@@ -20,15 +20,15 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Menu } from "lucide-react"
 
 const LINKS = [
-  { href: "/desenvolvimento/memorial/", label: "Home" },
-  { href: "/desenvolvimento/memorial/institucional", label: "Institucional" },
-  { href: "/desenvolvimento/memorial/estrutura", label: "Estrutura" },
-  { href: "/desenvolvimento/memorial/planos", label: "Planos" },
-  { href: "/desenvolvimento/memorial/obituario", label: "Obituário" },
-  { href: "/desenvolvimento/memorial/faq", label: "FAQ" },
-  { href: "/desenvolvimento/memorial/primeiros-passos", label: "Primeiros Passos" },
-  { href: "/desenvolvimento/memorial/como-chegar", label: "Como chegar" },
-  { href: "/desenvolvimento/memorial/contato", label: "Contato" },
+  { href: "/", label: "Home" },
+  { href: "/institucional", label: "Institucional" },
+  { href: "/estrutura", label: "Estrutura" },
+  { href: "/planos", label: "Planos" },
+  { href: "/obituario", label: "Obituário" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/primeiros-passos", label: "Primeiros Passos" },
+  { href: "/como-chegar", label: "Como chegar" },
+  { href: "/contato", label: "Contato" },
 ]
 
 export default function Header() {
@@ -39,7 +39,7 @@ export default function Header() {
   
   // Verifica se está na home para aplicar header fixo
   // Remove o basename para verificar se é a home
-  const cleanPathname = pathname.replace('/desenvolvimento/memorial', '') || '/'
+  const cleanPathname = pathname.replace('', '') || '/'
   const isHome = cleanPathname === "/"
 
   // Função para renderizar os links do menu
@@ -59,7 +59,7 @@ export default function Header() {
     if (error) {
       return LINKS.map((link, idx) => {
         const isActive =
-          link.href === "/desenvolvimento/memorial/"
+          link.href === "/"
             ? cleanPathname === "/"
             : pathname.startsWith(link.href)
 
@@ -98,9 +98,9 @@ export default function Header() {
         const isActive =
           href === "/"
             ? cleanPathname === "/"
-            : pathname.startsWith("/desenvolvimento/memorial" + href)
+            : pathname.startsWith("" + href)
 
-        const fullHref = href === "/" ? "/desenvolvimento/memorial/" : "/desenvolvimento/memorial" + href
+        const fullHref = href === "/" ? "/" : "" + href
 
         return isMobile ? (
           <a
@@ -166,7 +166,7 @@ export default function Header() {
     )}>
       <div className="mx-auto max-w-[1350px] flex items-center justify-between">
         {/* Logo */}
-        <a href="/desenvolvimento/memorial/">
+        <a href="/">
           <img 
             src={Logo} 
             alt="Memorial Parque Uberaba"

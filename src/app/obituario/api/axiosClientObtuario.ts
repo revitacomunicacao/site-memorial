@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosClientObtuario = axios.create({
-  baseURL: "https://companhiadamidia.com.br/desenvolvimento/obituario/admin/",
+  baseURL: "https://memorialparqueuberaba.com.br/obituario-adm/",
   headers: {
     "Content-Type": "application-json"
   }

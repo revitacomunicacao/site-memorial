@@ -31,7 +31,7 @@ interface ISepultados {
 export async function getSepultados(): Promise<ISepultados> {
   try {
     // Usa a URL base correta para o sistema de obituário
-    const response = await fetch("https://companhiadamidia.com.br/desenvolvimento/obituario/admin/api_pessoas.php");
+    const response = await fetch("https://memorialparqueuberaba.com.br/obituario-adm/api_pessoas.php");
     const data = await response.json();
     return data;
   } catch (error) {

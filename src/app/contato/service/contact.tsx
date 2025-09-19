@@ -1,6 +1,6 @@
 import type { IForm } from "../types/IForm";
 
-const ENDPOINT = "https://companhiadamidia.com.br/desenvolvimento/memorial/admin/wp-json/headless/v1/contact";
+const ENDPOINT = "https://memorialparqueuberaba.com.br/admin/wp-json/headless/v1/contact";
 
 export async function postForm(data: IForm) {
   //garantindo que o honeypot vai vazio

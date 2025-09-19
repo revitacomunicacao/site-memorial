@@ -11,7 +11,7 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename="/desenvolvimento/memorial">
+  <BrowserRouter>
     <Header />
     <App />
     <Footer />

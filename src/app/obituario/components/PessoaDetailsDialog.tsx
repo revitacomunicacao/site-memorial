@@ -33,7 +33,7 @@ interface Pessoa {
 // Configuração para URLs de imagens
 const IMAGE_CONFIG = {
   // Base URL para as imagens das quadras
-  QUADRA_BASE_URL: 'https://companhiadamidia.com.br/desenvolvimento/obituario/admin/uploads',
+  QUADRA_BASE_URL: 'https://memorialparqueuberaba.com.br/obituario-adm/uploads',
   
   // Função para gerar URL completa da imagem
   getQuadraImageUrl: (filename: string): string => {
