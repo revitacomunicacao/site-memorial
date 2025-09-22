@@ -68,7 +68,7 @@ export const Conteudo = () => {
         <div className="w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 justify-center">
             {conteudo.map(({ desc, img, title }, idx) => (
-              <div className="flex flex-col gap-4 sm:gap-5 bg-[#a9cd48] justify-start items-center p-4 sm:p-5 rounded-3xl sm:rounded-4xl w-full max-w-sm mx-auto h-110" key={idx}>
+              <div className="flex flex-col gap-4 sm:gap-5 bg-[#a9cd48] justify-start items-center p-4 sm:p-5 rounded-3xl sm:rounded-4xl w-full max-w-sm mx-auto" key={idx}>
                 <img src={img} className="h-12 w-12 sm:h-16 sm:w-16 lg:h-18 lg:w-18 object-contain" alt={`ícone ${title.toLowerCase()}`} />
                 <h2 className="text-xl sm:text-[40px]  text-[#416e44] text-center font-heebo">{title}</h2>
                 <div className="text-[#000000] text-[20px] text-center leading-relaxed font-questrial font-normal" dangerouslySetInnerHTML={{ __html: desc }} />
