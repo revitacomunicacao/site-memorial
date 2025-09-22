@@ -1,5 +1,5 @@
 import React from "react"
-import Logo from "@/assets/logo_branca.avif" // ajuste o caminho
+import Logo from "@/assets/logo_branca.avif"
 
 // SVGs fiéis ao print (traço + proporção)
 const InstagramIcon = ({ className = "" }) => (
@@ -84,6 +84,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      
     </footer>
+    
   )
 }
