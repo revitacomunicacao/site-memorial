@@ -9,11 +9,14 @@ export interface Pessoa {
   data_falecimento_formatada: string
   data_sepultamento: string
   data_sepultamento_formatada: string
+  horario_sepultamento: string
+  horario_sepultamento_formatado: string
   mae: string
   pai: string
   setor: string
   quadra_nome: string
   jazigo: string
+  gaveta: string
   quadra_foto: string
   created_at: string
   quadra_id: number

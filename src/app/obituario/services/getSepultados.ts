@@ -17,6 +17,7 @@ interface ISepultados {
     created_at: string;
     cpf: string;
     data_sepultamento: string;
+    horario_sepultamento: string;
     oculto: number;
     gaveta: string;
     quadra_nome: string;
@@ -25,13 +26,14 @@ interface ISepultados {
     data_nascimento_formatada: string;
     data_falecimento_formatada: string;
     data_sepultamento_formatada: string;
+    horario_sepultamento_formatado: string;
   }[]
 }
 
 export async function getSepultados(): Promise<ISepultados> {
   try {
     // Usa a URL base correta para o sistema de obituário
-    const response = await fetch("https://memorialparqueuberaba.com.br/obituario-adm/api_pessoas.php");
+    const response = await fetch("http://localhost/adm-obituario/api_pessoas.php");
     const data = await response.json();
     return data;
   } catch (error) {

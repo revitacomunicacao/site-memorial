@@ -14,6 +14,8 @@ interface Pessoa {
   data_falecimento_formatada: string
   data_sepultamento: string
   data_sepultamento_formatada: string
+  horario_sepultamento: string
+  horario_sepultamento_formatado: string
   mae: string
   pai: string
   setor: string
