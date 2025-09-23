@@ -71,10 +71,6 @@ export function PessoaDetailsDialog({ pessoa, open, onOpenChange }: PessoaDetail
               </h3>
               
               <div className="space-y-4">
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-gray-700">CPF:</span>
-                  <span className="text-gray-900">{pessoa.cpf_formatado}</span>
-                </div>
                 
                 <div className="flex justify-between items-center py-2 border-b border-gray-200">
                   <span className="font-semibold text-gray-700">Mãe:</span>
