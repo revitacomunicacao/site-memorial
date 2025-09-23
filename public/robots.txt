@@ -1,0 +1,57 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://memorialparqueuberaba.com.br/sitemap.xml
+
+# Páginas importantes - permitir indexação
+Allow: /institucional
+Allow: /estrutura
+Allow: /planos
+Allow: /obituario
+Allow: /faq
+Allow: /primeiros-passos
+Allow: /como-chegar
+Allow: /contato
+
+# Páginas que não devem ser indexadas (se houver)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Crawl-delay para ser respeitoso com o servidor
+Crawl-delay: 1
+
+# Regras específicas para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Regras específicas para Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Regras para bots de redes sociais
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Regras para bots de SEO
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 2
