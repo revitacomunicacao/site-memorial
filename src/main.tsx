@@ -4,7 +4,6 @@ import routes from 'virtual:generated-pages-react'
 import './index.css'
 import Header from './components/layout/header'
 import Footer from './components/layout/footer'
-import Assinatura from './components/layout/assinatura'
 import { WhatsAppFloat } from './components/ui/whatsapp-float'
 
 function App() {
@@ -16,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Header />
     <App />
     <Footer />
-    <Assinatura />
     <WhatsAppFloat />
   </BrowserRouter>
 )

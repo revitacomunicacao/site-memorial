@@ -170,7 +170,7 @@ export default function Header() {
           <img 
             src={Logo} 
             alt="Memorial Parque Uberaba"
-            className="py-2"
+            className="py-2 h-auto w-50"
           />
         </a>
 
