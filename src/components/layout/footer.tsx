@@ -28,7 +28,7 @@ const FacebookIcon = ({ className = "" }) => (
     fill="currentColor"
   >
     {/* “f” clássico do Facebook (proporção mais estreita, como no print) */}
-    <path d="M13.5 9.5V8.1c0-1.1.2-1.8 1.9-1.8h1.1V3.8c-.6-.1-1.4-.2-2.6-.2-2.6 0-4 1.5-4 4.1v1.8H8v2.9h1.9V21h3.6v-8.6h2.4l.4-2.9h-2.8z"/>
+    <path d="M13.5 9.5V8.1c0-1.1.2-1.8 1.9-1.8h1.1V3.8c-.6-.1-1.4-.2-2.6-.2-2.6 0-4 1.5-4 4.1v1.8H8v2.9h1.9V21h3.6v-8.6h2.4l.4-2.9h-2.8z" />
   </svg>
 )
 
@@ -40,6 +40,13 @@ export default function Footer() {
           {/* Logo + Endereços */}
           <div className="flex flex-col gap-4 max-w-3xl text-[22px] font-amargo">
             <img src={Logo} alt="Memorial Parque Uberaba" className="mb-4 w-[181px] h-[80px]" />
+
+            <div>
+              <p className="">
+                Memorial Parque Uberaba Cemitério e Crematório S.A. - 34.217.733/0001-92
+              </p>
+            </div>
+
             <div>
               <p className="font-extrabold text-[#abcd4a]">Escritório Central:</p>
               <p className="">
@@ -84,8 +91,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      
+
     </footer>
-    
+
   )
 }
