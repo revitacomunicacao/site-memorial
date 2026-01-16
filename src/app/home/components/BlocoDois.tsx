@@ -27,13 +27,7 @@ export const BlocoDois = () => {
   
   return (
     <section className="flex flex-col gap-8 sm:gap-10 justify-center items-center my-8 sm:my-10 px-4 sm:px-6">
-      <div className="text-center">
-        <h2 className="font-libre-baskerville text-[#345A38] text-2xl sm:text-[35px] leading-tight my-10"
-        >
-          Onde existe saudade é porque existe AMOR!
-        </h2>
-      </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-center items-start w-full max-w-6xl">
+      <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-center items-start w-full max-w-6xl">
         {blocosIcones.map(({ img, name, text }, idx)=> (
           <div key={idx} className="flex flex-col gap-3 justify-center items-center text-center">
             <img 
