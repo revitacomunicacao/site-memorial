@@ -43,7 +43,7 @@ export default function Footer() {
 
             <div>
               <p className="">
-                Memorial Parque Uberaba Cemitério e Crematório S.A. - 34.217.733/0001-92
+                Memorial Parque Uberaba Cemitério e Crematório S.A. - 37.217.733/0001-92
               </p>
             </div>
 
