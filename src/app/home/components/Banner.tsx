@@ -49,19 +49,33 @@ export const Banner = () => {
           className="w-full"
         >
           <CarouselContent>
-            {banners.map(({ banner, banner_responsivo, id, title }) => (
-              <CarouselItem key={id}>
+            {banners.map(({ banner, banner_responsivo, id, title, link }) => {
+              const href = link?.trim();
+              const img = (
                 <img
                   className="w-full h-full"
-                  src={
-                    isMobile && banner_responsivo
-                      ? banner_responsivo
-                      : banner
-                  }
+                  src={isMobile && banner_responsivo ? banner_responsivo : banner}
                   alt={title}
                 />
-              </CarouselItem>
-            ))}
+              );
+
+              return (
+                <CarouselItem key={id}>
+                  {href ? (
+                    <a
+                      href={href}
+                      className="block"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {img}
+                    </a>
+                  ) : (
+                    img
+                  )}
+                </CarouselItem>
+              );
+            })}
           </CarouselContent>
 
 
