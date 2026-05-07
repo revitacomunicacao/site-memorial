@@ -22,6 +22,10 @@ interface Pessoa {
   quadra_nome: string
   jazigo: string
   gaveta: string
+  tipo?: "Jazigo" | "Ossuário" | string
+  bloco?: string | null
+  nicho?: string | null
+  gaveta_ossuario?: string | null
   quadra_foto: string
   created_at: string
   quadra_id: number
@@ -50,7 +54,15 @@ export function ResultItem({ pessoa, onViewDetails }: ResultItemProps) {
               <div className="flex items-center space-x-2 text-gray-600">
                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span className="text-sm sm:text-lg break-words">
-                  Quadra {pessoa.quadra_nome} • Setor {pessoa.setor} • Jazigo {pessoa.jazigo} • Gaveta {pessoa.gaveta}
+                  {pessoa.tipo === "Ossuário" ? (
+                    <>
+                      Bloco {pessoa.bloco} • Nicho {pessoa.nicho} • Gaveta {pessoa.gaveta_ossuario}
+                    </>
+                  ) : (
+                    <>
+                      Quadra {pessoa.quadra_nome} • Setor {pessoa.setor} • Jazigo {pessoa.jazigo} • Gaveta {pessoa.gaveta}
+                    </>
+                  )}
                 </span>
               </div>
               

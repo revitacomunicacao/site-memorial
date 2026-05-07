@@ -27,6 +27,10 @@ interface Pessoa {
   quadra_nome: string
   jazigo: string
   gaveta: string
+  tipo?: "Jazigo" | "Ossuário" | string
+  bloco?: string | null
+  nicho?: string | null
+  gaveta_ossuario?: string | null
   quadra_foto: string
   created_at: string
   quadra_id: number
@@ -116,24 +120,46 @@ export function PessoaDetailsDialog({ pessoa, open, onOpenChange }: PessoaDetail
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-gray-700">Quadra:</span>
-                  <span className="text-gray-900">{pessoa.quadra_nome}</span>
+                  <span className="font-semibold text-gray-700">Tipo:</span>
+                  <span className="text-gray-900">{pessoa.tipo || "Jazigo"}</span>
                 </div>
-                
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-gray-700">Setor:</span>
-                  <span className="text-gray-900">{pessoa.setor}</span>
-                </div>
-                
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-gray-700">Jazigo:</span>
-                  <span className="text-gray-900">{pessoa.jazigo}</span>
-                </div>
-                
-                <div className="flex justify-between items-center py-2">
-                  <span className="font-semibold text-gray-700">Gaveta:</span>
-                  <span className="text-gray-900">{pessoa.gaveta}</span>
-                </div>
+
+                {pessoa.tipo === "Ossuário" ? (
+                  <>
+                    <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                      <span className="font-semibold text-gray-700">Bloco:</span>
+                      <span className="text-gray-900">{pessoa.bloco}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                      <span className="font-semibold text-gray-700">Nicho:</span>
+                      <span className="text-gray-900">{pessoa.nicho}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-semibold text-gray-700">Gaveta:</span>
+                      <span className="text-gray-900">{pessoa.gaveta_ossuario}</span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                      <span className="font-semibold text-gray-700">Quadra:</span>
+                      <span className="text-gray-900">{pessoa.quadra_nome}</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                      <span className="font-semibold text-gray-700">Setor:</span>
+                      <span className="text-gray-900">{pessoa.setor}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                      <span className="font-semibold text-gray-700">Jazigo:</span>
+                      <span className="text-gray-900">{pessoa.jazigo}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-semibold text-gray-700">Gaveta:</span>
+                      <span className="text-gray-900">{pessoa.gaveta}</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

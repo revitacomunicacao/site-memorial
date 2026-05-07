@@ -31,6 +31,10 @@ type Pessoa = {
   quadra_nome: string
   jazigo: string
   gaveta: string
+  tipo?: "Jazigo" | "Ossuário" | string
+  bloco?: string | null
+  nicho?: string | null
+  gaveta_ossuario?: string | null
   quadra_foto: string
   created_at: string
   quadra_id: number
@@ -45,6 +49,13 @@ export default function Obituario() {
   const [selectedPessoa, setSelectedPessoa] = useState<Pessoa | null>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
 
+  const normalize = (value: string) =>
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim()
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (!searchTerm.trim() || !sepultados?.pessoas) {
@@ -56,8 +67,8 @@ export default function Obituario() {
     const filteredPessoas = sepultados.pessoas.filter((pessoa: Pessoa) => {
       switch (searchType) {
         case "nome":
-          // Busca por nome que COMEÇA com o termo digitado
-          return pessoa.nome.toLowerCase().startsWith(searchTerm.toLowerCase())
+          // Busca por nome que CONTÉM o termo, ignorando acentos
+          return normalize(pessoa.nome).includes(normalize(searchTerm))
         case "cpf":
           // Busca por CPF EXATO - remove formatação e compara apenas números
           const searchCPF = searchTerm.replace(/\D/g, "") // Remove caracteres não numéricos
