@@ -16,7 +16,20 @@ import { cn } from "@/lib/utils"
 import Logo from "@/assets/logo-memorial-parque.png"
 import { Menu } from "lucide-react"
 
-const LINKS = [{ href: "/", label: "Home" }, { href: "/institucional", label: "Institucional" }, { href: "/servicos", label: "Serviços" }, { href: "/estrutura", label: "Estrutura" }, { href: "/planos", label: "Planos" }, { href: "/obituario", label: "Obituário" }, { href: "/faq", label: "FAQ" }, { href: "/primeiros-passos", label: "Primeiros Passos" }, { href: "/comunicacao", label: "Comunicação" }, { href: "/como-chegar", label: "Como chegar" }, { href: "/contato", label: "Contato" },]
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/institucional", label: "Institucional" },
+  { href: "/servicos", label: "Serviços" },
+  { href: "/estrutura", label: "Estrutura" },
+  { href: "/planos", label: "Planos" },
+  { href: "/obituario", label: "Obituário" },
+  { href: "/velorio-online", label: "Velório online" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/primeiros-passos", label: "Primeiros Passos" },
+  { href: "/comunicacao", label: "Comunicação" },
+  { href: "/como-chegar", label: "Como chegar" },
+  { href: "/contato", label: "Contato" },
+]
 
 export default function Header() {
   // pega a rota atual para marcar o ativo
@@ -57,14 +70,16 @@ export default function Header() {
           {name}
         </a>
       ) : (
-        <NavigationMenuItem key={idx}>
+        <NavigationMenuItem key={idx} className="shrink-0">
           <NavigationMenuLink
             href={fullHref}
             className={cn(
-              "text-[15px] leading-none ",
-              "text-[#2f5334]",
-              "transition-colors hover:opacity-80",
-              isActive && "text-[#c6d755]"
+              "inline-flex h-auto min-h-0 flex-row flex-nowrap items-center gap-0 rounded-md px-1.5 py-2 text-[13px] leading-snug whitespace-nowrap xl:text-[14px]",
+              "bg-transparent text-[#2f5334] hover:bg-transparent hover:text-[#2f5334]",
+              "focus:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent",
+              "transition-opacity hover:opacity-80",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#395e3e]/25",
+              isActive && "font-semibold text-[#c6d755] hover:text-[#c6d755]"
             )}
           >
             {name}
@@ -81,9 +96,9 @@ export default function Header() {
         isHome && "fixed top-0 left-0 right-0 z-50"
       )}
     >
-      <div className="mx-auto max-w-[1350px] flex items-center justify-between">
+      <div className="mx-auto flex max-w-[1350px] items-center justify-between gap-3 px-3 sm:px-4">
         {/* Logo */}
-        <a href="/">
+        <a href="/" className="shrink-0">
           <img
             src={Logo}
             alt="Memorial Parque Uberaba"
@@ -91,9 +106,12 @@ export default function Header() {
           />
         </a>
 
-        {/* Menu Desktop */}
-        <NavigationMenu className="hidden lg:block">
-          <NavigationMenuList className="flex gap-4">
+        {/* Menu Desktop: viewport=false evita viewport Radix desnecessário em links simples */}
+        <NavigationMenu
+          viewport={false}
+          className="hidden min-w-0 max-w-none flex-1 justify-end lg:flex"
+        >
+          <NavigationMenuList className="!flex-initial flex flex-wrap items-center justify-end gap-x-1.5 gap-y-1 xl:gap-x-2.5">
             {renderMenuLinks(false)}
           </NavigationMenuList>
         </NavigationMenu>
