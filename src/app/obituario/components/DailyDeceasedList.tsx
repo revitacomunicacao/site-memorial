@@ -7,8 +7,25 @@ interface Pessoa {
   nome: string
   data_sepultamento: string
   data_sepultamento_formatada: string
-  horario_sepultamento: string
-  horario_sepultamento_formatado: string
+  horario_sepultamento?: string | null
+  horario_sepultamento_formatado?: string | null
+}
+
+/** Exibe horário: usa o campo formatado da API ou deriva de TIME MySQL (HH:MM:SS). */
+function getHorarioExibicao(pessoa: Pessoa): string | null {
+  const formatted = pessoa.horario_sepultamento_formatado?.trim()
+  if (formatted) return formatted
+
+  const raw = pessoa.horario_sepultamento?.trim()
+  if (!raw) return null
+
+  const parts = raw.split(":")
+  if (parts.length >= 2) {
+    const h = parts[0].replace(/\D/g, "").padStart(2, "0")
+    const m = parts[1].replace(/\D/g, "").padStart(2, "0")
+    if (h.length <= 2 && m.length === 2) return `${h}:${m}`
+  }
+  return raw
 }
 
 interface DailyDeceasedListProps {
@@ -71,7 +88,9 @@ export function DailyDeceasedList({ pessoas }: DailyDeceasedListProps) {
       </CardHeader>
       <CardContent>
         <div className="space-y-2 max-h-64 overflow-y-auto">
-          {todaySepultamentos.map((pessoa) => (
+          {todaySepultamentos.map((pessoa) => {
+            const horario = getHorarioExibicao(pessoa)
+            return (
             <div
               key={pessoa.id}
               className="flex items-center gap-3 p-3 bg-white rounded-lg border border-blue-100 shadow-sm hover:shadow-md transition-shadow duration-200"
@@ -83,14 +102,15 @@ export function DailyDeceasedList({ pessoas }: DailyDeceasedListProps) {
                 <p className="text-sm font-medium text-gray-800 truncate">
                   {pessoa.nome}
                 </p>
-                {pessoa.horario_sepultamento_formatado && (
+                {horario ? (
                   <p className="text-xs text-blue-600 font-medium">
-                    {pessoa.horario_sepultamento_formatado}
+                    Horário: {horario}
                   </p>
-                )}
+                ) : null}
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       </CardContent>
     </Card>
