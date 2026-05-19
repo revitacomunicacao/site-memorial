@@ -11,6 +11,36 @@ interface Pessoa {
   horario_sepultamento_formatado?: string | null
 }
 
+const TIMEZONE_BR = "America/Sao_Paulo"
+
+/** Data de hoje no fuso do Memorial (YYYY-MM-DD), válida até 23:59:59 local. */
+function getTodayDateKey(): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: TIMEZONE_BR }).format(
+    new Date()
+  )
+}
+
+/** Normaliza data da API (YYYY-MM-DD, datetime ISO ou DD/MM/YYYY) para YYYY-MM-DD. */
+function normalizeSepultamentoDate(value: string | null | undefined): string | null {
+  if (!value?.trim()) return null
+  const trimmed = value.trim()
+
+  const isoPrefix = trimmed.match(/^(\d{4}-\d{2}-\d{2})/)
+  if (isoPrefix) return isoPrefix[1]
+
+  const brDate = trimmed.match(/^(\d{2})\/(\d{2})\/(\d{4})/)
+  if (brDate) return `${brDate[3]}-${brDate[2]}-${brDate[1]}`
+
+  return null
+}
+
+function isSepultamentoHoje(pessoa: Pessoa): boolean {
+  const hoje = getTodayDateKey()
+  const dataRaw = normalizeSepultamentoDate(pessoa.data_sepultamento)
+  const dataFormatada = normalizeSepultamentoDate(pessoa.data_sepultamento_formatada)
+  return dataRaw === hoje || dataFormatada === hoje
+}
+
 /** Exibe horário: usa o campo formatado da API ou deriva de TIME MySQL (HH:MM:SS). */
 function getHorarioExibicao(pessoa: Pessoa): string | null {
   const formatted = pessoa.horario_sepultamento_formatado?.trim()
@@ -33,26 +63,15 @@ interface DailyDeceasedListProps {
 }
 
 export function DailyDeceasedList({ pessoas }: DailyDeceasedListProps) {
-  // Função para obter a data atual no formato YYYY-MM-DD
-  const getTodayDate = () => {
-    const today = new Date()
-    return today.toISOString().split('T')[0]
-  }
+  const getTodayFormatted = () =>
+    new Intl.DateTimeFormat("pt-BR", {
+      timeZone: TIMEZONE_BR,
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(new Date())
 
-  // Função para obter a data atual formatada
-  const getTodayFormatted = () => {
-    const today = new Date()
-    return today.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    })
-  }
-
-  // Filtrar pessoas que têm sepultamento hoje
-  const todaySepultamentos = pessoas.filter(pessoa => {
-    return pessoa.data_sepultamento === getTodayDate()
-  })
+  const todaySepultamentos = pessoas.filter(isSepultamentoHoje)
 
   if (todaySepultamentos.length === 0) {
     return (
