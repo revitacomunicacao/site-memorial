@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { Calendar, Heart } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -62,7 +63,9 @@ interface DailyDeceasedListProps {
   pessoas: Pessoa[]
 }
 
-export function DailyDeceasedList({ pessoas }: DailyDeceasedListProps) {
+export const DailyDeceasedList = memo(function DailyDeceasedList({
+  pessoas,
+}: DailyDeceasedListProps) {
   const getTodayFormatted = () =>
     new Intl.DateTimeFormat("pt-BR", {
       timeZone: TIMEZONE_BR,
@@ -134,4 +137,4 @@ export function DailyDeceasedList({ pessoas }: DailyDeceasedListProps) {
       </CardContent>
     </Card>
   )
-}
+})

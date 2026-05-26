@@ -42,7 +42,6 @@ type Pessoa = {
 
 export default function Obituario() {
   const { data: sepultados, loading, error } = useSepultados()
-  const [searchTerm, setSearchTerm] = useState("")
   const [searchType, setSearchType] = useState<SearchType>("nome")
   const [hasSearched, setHasSearched] = useState(false)
   const [searchResults, setSearchResults] = useState<Pessoa[]>([])
@@ -56,8 +55,7 @@ export default function Obituario() {
       .toLowerCase()
       .trim()
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSearch = (searchTerm: string, type: SearchType) => {
     if (!searchTerm.trim() || !sepultados?.pessoas) {
       setSearchResults([])
       setHasSearched(false)
@@ -65,26 +63,28 @@ export default function Obituario() {
     }
 
     const filteredPessoas = sepultados.pessoas.filter((pessoa: Pessoa) => {
-      switch (searchType) {
+      switch (type) {
         case "nome":
-          // Busca por nome que CONTÉM o termo, ignorando acentos
           return normalize(pessoa.nome).includes(normalize(searchTerm))
-        case "cpf":
-          // Busca por CPF EXATO - remove formatação e compara apenas números
-          const searchCPF = searchTerm.replace(/\D/g, "") // Remove caracteres não numéricos
-          const pessoaCPF = pessoa.cpf.replace(/\D/g, "") // Remove formatação do CPF da pessoa
-          
-          return pessoaCPF === searchCPF // Comparação exata
-        case "data":
-          // Busca APENAS por data de nascimento
-          const searchDate = searchTerm.replace(/\D/g, "") // Remove caracteres não numéricos
-          
-          // Busca nas datas formatadas (DD/MM/AAAA) e nas datas originais (AAAA-MM-DD)
-          const nascimentoFormatada = pessoa.data_nascimento_formatada.replace(/\D/g, "")
-          const nascimentoOriginal = pessoa.data_nascimento.replace(/\D/g, "")
-          
-          return nascimentoFormatada.includes(searchDate) || 
-                 nascimentoOriginal.includes(searchDate)
+        case "cpf": {
+          const searchCPF = searchTerm.replace(/\D/g, "")
+          const pessoaCPF = (pessoa.cpf ?? "").replace(/\D/g, "")
+          return pessoaCPF === searchCPF
+        }
+        case "data": {
+          const searchDate = searchTerm.replace(/\D/g, "")
+          const nascimentoFormatada = (
+            pessoa.data_nascimento_formatada ?? ""
+          ).replace(/\D/g, "")
+          const nascimentoOriginal = (pessoa.data_nascimento ?? "").replace(
+            /\D/g,
+            ""
+          )
+          return (
+            nascimentoFormatada.includes(searchDate) ||
+            nascimentoOriginal.includes(searchDate)
+          )
+        }
         default:
           return false
       }
@@ -97,12 +97,6 @@ export default function Obituario() {
   const handleViewDetails = (pessoa: Pessoa) => {
     setSelectedPessoa(pessoa)
     setDialogOpen(true)
-  }
-
-  const handleClearSearch = () => {
-    setSearchTerm("")
-    setHasSearched(false)
-    setSearchResults([])
   }
 
   if (loading) {
@@ -131,9 +125,7 @@ export default function Obituario() {
           <div className="lg:col-span-3 order-1 lg:order-1">
             {/* Search Section */}
             <SearchForm
-              searchTerm={searchTerm}
               searchType={searchType}
-              onSearchTermChange={setSearchTerm}
               onSearchTypeChange={setSearchType}
               onSubmit={handleSearch}
             />
