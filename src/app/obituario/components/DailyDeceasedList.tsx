@@ -1,8 +1,7 @@
 import { memo } from "react"
-import { Calendar, Heart } from "lucide-react"
+import { Calendar, Heart, MapPin } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-// Interface para pessoa
 interface Pessoa {
   id: number
   nome: string
@@ -10,6 +9,14 @@ interface Pessoa {
   data_sepultamento_formatada: string
   horario_sepultamento?: string | null
   horario_sepultamento_formatado?: string | null
+  setor?: string | null
+  quadra_nome?: string | null
+  jazigo?: string | null
+  gaveta?: string | null
+  tipo?: "Jazigo" | "Ossuário" | string
+  bloco?: string | null
+  nicho?: string | null
+  gaveta_ossuario?: string | null
 }
 
 const TIMEZONE_BR = "America/Sao_Paulo"
@@ -57,6 +64,27 @@ function getHorarioExibicao(pessoa: Pessoa): string | null {
     if (h.length <= 2 && m.length === 2) return `${h}:${m}`
   }
   return raw
+}
+
+function getLocalizacaoTexto(pessoa: Pessoa): string | null {
+  if (pessoa.tipo === "Ossuário") {
+    const parts = [
+      pessoa.bloco != null && pessoa.bloco !== "" && `Bloco ${pessoa.bloco}`,
+      pessoa.nicho != null && pessoa.nicho !== "" && `Nicho ${pessoa.nicho}`,
+      pessoa.gaveta_ossuario != null &&
+        pessoa.gaveta_ossuario !== "" &&
+        `Gaveta ${pessoa.gaveta_ossuario}`,
+    ].filter(Boolean) as string[]
+    return parts.length > 0 ? parts.join(" • ") : null
+  }
+
+  const parts = [
+    pessoa.quadra_nome && `Quadra ${pessoa.quadra_nome}`,
+    pessoa.setor && `Setor ${pessoa.setor}`,
+    pessoa.jazigo && `Jazigo ${pessoa.jazigo}`,
+    pessoa.gaveta && `Gaveta ${pessoa.gaveta}`,
+  ].filter(Boolean) as string[]
+  return parts.length > 0 ? parts.join(" • ") : null
 }
 
 interface DailyDeceasedListProps {
@@ -112,18 +140,25 @@ export const DailyDeceasedList = memo(function DailyDeceasedList({
         <div className="space-y-2 max-h-64 overflow-y-auto">
           {todaySepultamentos.map((pessoa) => {
             const horario = getHorarioExibicao(pessoa)
+            const localizacao = getLocalizacaoTexto(pessoa)
             return (
             <div
               key={pessoa.id}
-              className="flex items-center gap-3 p-3 bg-white rounded-lg border border-blue-100 shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="flex items-start gap-3 p-3 bg-white rounded-lg border border-blue-100 shadow-sm hover:shadow-md transition-shadow duration-200"
             >
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 pt-0.5">
                 <Heart className="h-4 w-4 text-blue-400" />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-800 truncate">
+              <div className="flex-1 min-w-0 space-y-1">
+                <p className="text-sm font-medium text-gray-800 break-words">
                   {pessoa.nome}
                 </p>
+                {localizacao ? (
+                  <p className="flex items-start gap-1 text-xs text-gray-600 break-words">
+                    <MapPin className="h-3 w-3 flex-shrink-0 mt-0.5" />
+                    <span>{localizacao}</span>
+                  </p>
+                ) : null}
                 {horario ? (
                   <p className="text-xs text-blue-600 font-medium">
                     Horário: {horario}
