@@ -1,6 +1,7 @@
 import { Banner } from "@/app/home/components/Banner";
 import { BlocoDois } from "./home/components/BlocoDois";
 import BlocoTres from "./home/components/BlocoTres";
+import { Galeria } from "./home/components/Galeria";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       </section>
       <BlocoDois />
       <BlocoTres />
+      <Galeria />
     </main>
   );
 }
