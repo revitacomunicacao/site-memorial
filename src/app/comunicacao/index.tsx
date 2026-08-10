@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
-import foto from "@/assets/fotoComunicacao.jpg"
+import foto from "@/assets/comunicacao.jpeg"
 
 export default function Comunicacao() {
   const { data: blogs, loading, error, refetch } = useContent<IBlog>("/blog");
@@ -53,7 +53,7 @@ export default function Comunicacao() {
 
   return (
     <main>
-      <img className="mb-10" src={foto} alt="banner da pagina" />
+      <img className="mb-10 block w-full h-auto object-cover object-center" src={foto} alt="banner da pagina" />
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
