@@ -8,10 +8,18 @@ import {
 import { useContent } from "@/hooks/useContent";
 import { IBanners } from "../types/IBanners";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 
 export const Banner = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const autoplay = useRef(
+    Autoplay({
+      delay: 5000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  );
 
   const { data: banners, error, loading, refetch } =
     useContent<IBanners>("/banners");
@@ -46,6 +54,7 @@ export const Banner = () => {
       <div className="relative w-full overflow-hidden">
         <Carousel
           opts={{ align: "start", loop: true }}
+          plugins={[autoplay.current]}
           className="w-full"
         >
           <CarouselContent>

@@ -32,6 +32,17 @@ const FacebookIcon = ({ className = "" }) => (
   </svg>
 )
 
+const YoutubeIcon = ({ className = "" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    fill="currentColor"
+  >
+    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.2 3.5-6.2 3.5z" />
+  </svg>
+)
+
 export default function Footer() {
   return (
     <footer className="flex justify-center bg-[#355b39] text-white py-10">
@@ -87,6 +98,16 @@ export default function Footer() {
               aria-label="Facebook"
             >
               <FacebookIcon className="w-5 h-5 text-[#2f5334]" />
+            </a>
+
+            <a
+              href="https://www.youtube.com/@MemorialParqueUberaba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-grid place-items-center w-10 h-10 rounded-full bg-white"
+              aria-label="YouTube"
+            >
+              <YoutubeIcon className="w-5 h-5 text-[#2f5334]" />
             </a>
           </div>
         </div>
