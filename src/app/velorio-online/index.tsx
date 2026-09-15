@@ -1,11 +1,13 @@
 /**
- * Embed Adiaŭ — parâmetros conforme documentação (Integração_da_Tecnologia_Adiaŭ.pdf):
- * - tab=same: mantém a navegação dentro do iframe no mesmo domínio do site
- * - color1–color8: hex sem "#" (cores do Memorial: verdes #2f5334 / #395e3e, fundo #f7f7f7)
- * - Recomendação: altura 500–600px, largura ~80%, allowfullscreen
+ * Embed Adiaŭ 2.6 — o cliente é identificado pelo token na rota
+ * (`/TOKEN`), não mais por `/embed/?hash=`. Cores e exibição de fotos
+ * vêm de “Preferência de Telas” no CMS (app.adiau.com.br), não da URL.
+ * - tab=same: cerimônia permanece no iframe
+ * - lang=pt-br: português (padrão se omitido)
+ * - altura mínima 600px e largura próxima da tela, conforme o PDF
  */
 const ADIAU_EMBED_SRC =
-  "https://adiau.com.br/embed/?hash=xjI0G5nQnYsZ3y0IL83v7hU7&tab=same&lang=pt-br&color1=f7f7f7&color2=395e3e&color3=ffffff&color4=f4f7f4&color5=2f5334&color6=f7f7f7&color7=2f5334&color8=395e3e"
+  "https://adiau.com.br/xjI0G5nQnYsZ3y0IL83v7hU7?tab=same&lang=pt-br"
 
 export default function VelorioOnline() {
   return (
@@ -25,11 +27,10 @@ export default function VelorioOnline() {
           <iframe
             src={ADIAU_EMBED_SRC}
             title="Velório online — Memorial Parque Uberaba (Adiaŭ)"
-            className="h-[min(580px,85vh)] w-full max-w-[1200px] rounded-2xl border-2 border-gray-200 bg-white shadow-xl sm:w-4/5 sm:border-4"
-            style={{ minHeight: "500px" }}
+            className="h-[min(720px,85vh)] w-full rounded-2xl border-2 border-gray-200 bg-white shadow-xl sm:border-4"
+            style={{ minHeight: "600px" }}
             allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
-            // Atributos legados citados no PDF para compatibilidade com players em tela cheia
             {...({
               webkitallowfullscreen: "true",
               mozallowfullscreen: "true",
