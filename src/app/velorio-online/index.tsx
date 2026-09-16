@@ -1,13 +1,13 @@
 /**
- * Embed Adiaŭ 2.6 — o cliente é identificado pelo token na rota
- * (`/TOKEN`), não mais por `/embed/?hash=`. Cores e exibição de fotos
- * vêm de “Preferência de Telas” no CMS (app.adiau.com.br), não da URL.
+ * Embed Adiaŭ 2.6 — URL oficial enviada pela Adiaŭ:
+ * https://adiau.com.br/v2/embed/?hash=...
+ * Cores e fotos vêm de “Preferência de Telas” no CMS, não da URL.
  * - tab=same: cerimônia permanece no iframe
  * - lang=pt-br: português (padrão se omitido)
  * - altura mínima 600px e largura próxima da tela, conforme o PDF
  */
 const ADIAU_EMBED_SRC =
-  "https://adiau.com.br/xjI0G5nQnYsZ3y0IL83v7hU7?tab=same&lang=pt-br"
+  "https://adiau.com.br/v2/embed/?hash=xjI0G5nQnYsZ3y0IL83v7hU7&tab=same&lang=pt-br"
 
 export default function VelorioOnline() {
   return (
