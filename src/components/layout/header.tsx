@@ -112,7 +112,7 @@ export default function Header() {
 
   const linkClass = (isActive: boolean) =>
     cn(
-      "inline-flex h-auto min-h-0 flex-row flex-nowrap items-center gap-0 rounded-md px-1.5 py-2 text-[13px] leading-snug whitespace-nowrap xl:text-[14px]",
+      "inline-flex h-auto min-h-0 flex-row flex-nowrap items-center gap-0 rounded-md px-1.5 py-2 text-[13px] font-normal leading-snug whitespace-nowrap xl:text-[14px]",
       "bg-transparent text-[#2f5334] hover:bg-transparent hover:text-[#2f5334]",
       "focus:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent",
       "data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent",
