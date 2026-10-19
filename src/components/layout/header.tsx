@@ -1,8 +1,11 @@
+import { useState } from "react"
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import {
   Sheet,
@@ -14,14 +17,24 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import Logo from "@/assets/logo-memorial-parque.png"
-import { Menu } from "lucide-react"
+import { ChevronDown, Menu } from "lucide-react"
 
-const LINKS = [
+type MenuChild = { href: string; label: string }
+type MenuLink = { href: string; label: string; children?: MenuChild[] }
+
+const LINKS: MenuLink[] = [
   { href: "/", label: "Home" },
   { href: "/institucional", label: "Institucional" },
   { href: "/servicos", label: "Serviços" },
   { href: "/estrutura", label: "Estrutura" },
-  { href: "/planos", label: "Planos" },
+  {
+    href: "/planos",
+    label: "Planos",
+    children: [
+      { href: "/planos", label: "Jazigo" },
+      { href: "/cremacao", label: "Cremação" },
+    ],
+  },
   { href: "/obituario", label: "Obituário" },
   { href: "/velorio-online", label: "Velório online" },
   { href: "/faq", label: "FAQ" },
@@ -31,58 +44,154 @@ const LINKS = [
   { href: "/contato", label: "Contato" },
 ]
 
+function isLinkActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/"
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function MobileSubmenu({
+  label,
+  items,
+  pathname,
+  defaultOpen,
+}: {
+  label: string
+  items: MenuChild[]
+  pathname: string
+  defaultOpen: boolean
+}) {
+  const [open, setOpen] = useState(defaultOpen)
+  const isActive = items.some((item) => isLinkActive(pathname, item.href))
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        className={cn(
+          "flex w-full items-center justify-between rounded-lg px-4 py-3 text-left text-lg font-medium text-[#2f5334] transition-colors hover:bg-gray-50",
+          isActive && "bg-gray-50 text-[#c6d755]"
+        )}
+      >
+        {label}
+        <ChevronDown
+          className={cn("h-5 w-5 shrink-0 transition-transform", open && "rotate-180")}
+          aria-hidden="true"
+        />
+      </button>
+      {open && (
+        <div className="mt-1 ml-3 flex flex-col gap-1 border-l border-[#2f5334]/15 pl-2">
+          {items.map((item) => {
+            const childIsActive = isLinkActive(pathname, item.href)
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "block rounded-lg px-4 py-2.5 text-base font-medium text-[#2f5334] transition-colors hover:bg-gray-50",
+                  childIsActive && "bg-gray-50 font-semibold text-[#c6d755]"
+                )}
+              >
+                {item.label}
+              </a>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Header() {
   // pega a rota atual para marcar o ativo
   const pathname =
     typeof window !== "undefined" ? window.location.pathname : "/"
 
-  // Verifica se está na home para aplicar header fixo
-  // Remove o basename para verificar se é a home
-  const cleanPathname = pathname.replace("", "") || "/"
-  const isHome = cleanPathname === "/"
+  const isHome = pathname === "/"
 
-  // Função para renderizar os links do menu
-  // Agora usa apenas LINKS, mas com a MESMA tipografia/classe do branch `menu && menu.length > 0`
+  const linkClass = (isActive: boolean) =>
+    cn(
+      "inline-flex h-auto min-h-0 flex-row flex-nowrap items-center gap-0 rounded-md px-1.5 py-2 text-[13px] leading-snug whitespace-nowrap xl:text-[14px]",
+      "bg-transparent text-[#2f5334] hover:bg-transparent hover:text-[#2f5334]",
+      "focus:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent",
+      "data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent",
+      "transition-opacity hover:opacity-80",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#395e3e]/25",
+      isActive && "font-semibold text-[#c6d755] hover:text-[#c6d755] data-[state=open]:text-[#c6d755]"
+    )
+
   const renderMenuLinks = (isMobile = false) => {
-    const menu = LINKS.map((link) => ({
-      name: link.label,
-      href: link.href,
-    }))
+    return LINKS.map((link) => {
+      const childActive = link.children?.some((child) =>
+        isLinkActive(pathname, child.href)
+      )
+      const isActive = childActive || isLinkActive(pathname, link.href)
 
-    return menu.map(({ name, href }, idx) => {
-      const isActive =
-        href === "/"
-          ? cleanPathname === "/"
-          : pathname.startsWith("" + href)
+      if (isMobile && link.children) {
+        return (
+          <MobileSubmenu
+            key={link.label}
+            label={link.label}
+            items={link.children}
+            pathname={pathname}
+            defaultOpen={Boolean(childActive)}
+          />
+        )
+      }
 
-      const fullHref = href === "/" ? "/" : "" + href
-
-      return isMobile ? (
-        <a
-          key={idx}
-          href={fullHref}
-          className={cn(
-            "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg ",
-            "text-[#2f5334]",
-            isActive && "text-[#c6d755] bg-gray-50"
-          )}
-        >
-          {name}
-        </a>
-      ) : (
-        <NavigationMenuItem key={idx} className="shrink-0">
-          <NavigationMenuLink
-            href={fullHref}
+      if (isMobile) {
+        return (
+          <a
+            key={link.href}
+            href={link.href}
             className={cn(
-              "inline-flex h-auto min-h-0 flex-row flex-nowrap items-center gap-0 rounded-md px-1.5 py-2 text-[13px] leading-snug whitespace-nowrap xl:text-[14px]",
-              "bg-transparent text-[#2f5334] hover:bg-transparent hover:text-[#2f5334]",
-              "focus:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent",
-              "transition-opacity hover:opacity-80",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#395e3e]/25",
-              isActive && "font-semibold text-[#c6d755] hover:text-[#c6d755]"
+              "block py-3 px-4 text-lg font-medium transition-colors hover:bg-gray-50 rounded-lg",
+              "text-[#2f5334]",
+              isActive && "text-[#c6d755] bg-gray-50"
             )}
           >
-            {name}
+            {link.label}
+          </a>
+        )
+      }
+
+      if (link.children) {
+        return (
+          <NavigationMenuItem key={link.label} className="shrink-0">
+            <NavigationMenuTrigger className={linkClass(isActive)}>
+              {link.label}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="z-50 min-w-[180px] bg-[#f7f7f7] p-1.5">
+              <ul className="flex flex-col">
+                {link.children.map((child) => {
+                  const childIsActive = isLinkActive(pathname, child.href)
+                  return (
+                    <li key={child.href}>
+                      <NavigationMenuLink
+                        href={child.href}
+                        className={cn(
+                          "block rounded-md px-3 py-2 text-[14px] text-[#2f5334]",
+                          "hover:bg-white hover:text-[#2f5334]",
+                          "focus:bg-white focus:text-[#2f5334]",
+                          childIsActive && "bg-white font-semibold text-[#c6d755] hover:text-[#c6d755]"
+                        )}
+                      >
+                        {child.label}
+                      </NavigationMenuLink>
+                    </li>
+                  )
+                })}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        )
+      }
+
+      return (
+        <NavigationMenuItem key={link.href} className="shrink-0">
+          <NavigationMenuLink href={link.href} className={linkClass(isActive)}>
+            {link.label}
           </NavigationMenuLink>
         </NavigationMenuItem>
       )

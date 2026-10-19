@@ -21,4 +21,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  server: {
+    proxy: {
+      "/admin": {
+        target: "https://www.memorialparqueuberaba.com.br",
+        changeOrigin: true,
+        secure: true,
+      },
+      "/obituario-adm": {
+        target: "https://www.memorialparqueuberaba.com.br",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 })
